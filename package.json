@@ -1,0 +1,12 @@
+{
+  "name": "easy-data",
+  "version": "1.0.0-alpha1",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdbootstrap/easy-data.git"
+  },
+  "author": "MDB <office@mdbootstrap.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/mdbootstrap/easy-data#readme"
+}
