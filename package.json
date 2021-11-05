@@ -1,6 +1,6 @@
 {
   "name": "mdb-easydata",
-  "version": "1.0.0-alpha1",
+  "version": "1.0.0-alpha2",
   "description": "",
   "repository": {
     "type": "git",
@@ -8,5 +8,5 @@
   },
   "author": "MDB <office@mdbootstrap.com>",
   "license": "MIT",
-  "homepage": "https://github.com/mdbootstrap/mdb-easydata#readme"
+  "homepage": "https://easy-data.mdbgo.io/"
 }
