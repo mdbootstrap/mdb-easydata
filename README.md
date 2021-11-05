@@ -1,1 +1,1 @@
-# easy-data
+Visit https://easy-data.mdbgo.io/
