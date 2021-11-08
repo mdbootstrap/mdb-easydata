@@ -1,1 +1,1 @@
-Visit https://easy-data.mdbgo.io/
+Documentation, tutorials and all details available on the website: https://easy-data.mdbgo.io/
