@@ -99,16 +99,16 @@
             <li class="nav-item me-3 me-lg-1">
               <a
                 class="nav-link d-flex"
-                href="https://easy-data.mdbgo.io/#section-google-analytics"
+                href="https://easy-data.mdbgo.io/#section-search-console"
                 target="_blank"
               >
                 <img
-                  src="https://easy-data.mdbgo.io/img/logo-ga.png"
+                  src="https://easy-data.mdbgo.io/img/logo-sc.png"
                   height="22"
                   class="me-2"
                   alt=""
                 />
-                <span>Google Analytics example</span>
+                <span>Search Console example</span>
               </a>
             </li>
           </ul>
@@ -172,9 +172,12 @@
       <div class="container">
         <!--Section: Design Block-->
         <section class="mb-8">
-          <h3 class="mb-7 text-center fw-bold">Last 7 days</h3>
+          <h3 class="mb-7 text-center fw-bold">
+            <span class="badge badge-success rounded-4">2021-11-01</span> :
+            <span class="badge badge-primary rounded-4">2021-11-07</span>
+          </h3>
           <div class="row">
-            <div class="col-md-4 mb-4 mb-md-0">
+            <div class="col-md-3 mb-4 mb-md-0">
               <!-- Card -->
               <div class="card">
                 <div
@@ -199,16 +202,16 @@
                     <i class="fas fa-users fa-lg"></i>
                   </div>
                   <div class="ms-3">
-                    <p class="text-muted mb-1">Users</p>
+                    <p class="text-muted mb-1">Total clicks</p>
                     <p class="mb-0">
-                      <span id="displayUsers" class="h4 me-2"></span>
+                      <span id="displayClicks" class="h4 me-2"></span>
                     </p>
                   </div>
                 </div>
               </div>
               <!-- Card -->
             </div>
-            <div class="col-md-4 mb-4 mb-md-0">
+            <div class="col-md-3 mb-4 mb-md-0">
               <!-- Card -->
               <div class="card">
                 <div
@@ -233,16 +236,16 @@
                     <i class="fas fa-file fa-lg"></i>
                   </div>
                   <div class="ms-3">
-                    <p class="text-muted mb-1">Page views</p>
+                    <p class="text-muted mb-1">Total impressions</p>
                     <p class="mb-0">
-                      <span id="displayPageViews" class="h4 me-2"></span>
+                      <span id="displayImpressions" class="h4 me-2"></span>
                     </p>
                   </div>
                 </div>
               </div>
               <!-- Card -->
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3 mb-4 mb-md-0">
               <!-- Card -->
               <div class="card">
                 <div
@@ -267,9 +270,43 @@
                     <i class="fas fa-chart-line fa-lg"></i>
                   </div>
                   <div class="ms-3">
-                    <p class="text-muted mb-1">Sessions</p>
+                    <p class="text-muted mb-1">Average CTR</p>
                     <p class="mb-0">
-                      <span id="displaySessions" class="h4 me-2"></span>
+                      <span id="displayCTR" class="h4 me-2"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Card -->
+            </div>
+            <div class="col-md-3 mb-4 mb-md-0">
+              <!-- Card -->
+              <div class="card">
+                <div
+                  class="
+                    card-body
+                    d-flex
+                    justify-content-start
+                    align-items-center
+                  "
+                >
+                  <div
+                    class="
+                      bg-primary
+                      text-white
+                      rounded-4
+                      d-flex
+                      justify-content-center
+                      align-items-center
+                    "
+                    style="width: 50px; height: 50px"
+                  >
+                    <i class="fas fa-file fa-lg"></i>
+                  </div>
+                  <div class="ms-3">
+                    <p class="text-muted mb-1">Average position</p>
+                    <p class="mb-0">
+                      <span id="displayPosition" class="h4 me-2"></span>
                     </p>
                   </div>
                 </div>
@@ -295,41 +332,36 @@
   ></script>
   <!-- Google API -->
   <script src="https://apis.google.com/js/api.js"></script>
-  <!-- easyData - Google Analtyics -->
-  <script type="text/javascript" src="js/easyData-google-analtyics.js"></script>
+  <!-- easyData - Search Console -->
+  <script type="text/javascript" src="js/easyData-search-console.js"></script>
 
   <!-- easyData - Fetching data-->
   <script>
     // Your Client ID
     const CLIENT_ID = "";
 
-    function loadData() {
-      // Your GA property ID
-      const propertyId = "";
-
-      const startDate = "7daysAgo";
-      const endDate = "today";
-      const metrics = [
-        { name: "activeUsers" },
-        { name: "screenPageViews" },
-        { name: "sessions" },
-      ];
-
-      const query = {
-        dateRanges: [{ startDate, endDate }],
-        metrics: metrics,
-      };
-
-      runReport(propertyId, query, displayResult);
+    function displayResult(response) {
+      document.getElementById("displayClicks").innerText =
+        response.result.rows[0].clicks;
+      document.getElementById("displayImpressions").innerText =
+        response.result.rows[0].impressions;
+      document.getElementById("displayCTR").innerText = parseFloat(
+        response.result.rows[0].ctr
+      ).toFixed(2);
+      document.getElementById("displayPosition").innerText = parseFloat(
+        response.result.rows[0].position
+      ).toFixed(2);
     }
 
-    function displayResult(response) {
-      document.getElementById("displayUsers").innerHTML =
-        response.result.rows[0].metricValues[0].value;
-      document.getElementById("displayPageViews").innerHTML =
-        response.result.rows[0].metricValues[1].value;
-      document.getElementById("displaySessions").innerHTML =
-        response.result.rows[0].metricValues[2].value;
+    // Your Search Console property and date range
+    function loadData() {
+      const siteUrl = "";
+      const startDate = "2021-11-01";
+      const endDate = "2021-11-07";
+
+      const query = { startDate, endDate };
+
+      executeQuery(siteUrl, query, displayResult);
     }
 
     // Login buttons
